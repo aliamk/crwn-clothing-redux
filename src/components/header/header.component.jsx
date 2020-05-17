@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { auth } from '../../firebase/firebase.utils'
+import { connect } from 'react-redux' //A HOC that lets us modify components to have access to things related to Redux
 
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 import './header.styles.scss'
@@ -31,4 +32,9 @@ const Header = ({ currentUser }) => (
 // Use the ternary operator to generate a SIGN OUT button if the user is signed in, and to return to 
 // a SIGN IN button when the user is signed out
 
-export default Header
+// redux: this function connects state header with the userReducer w/o going though App.js
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+})
+
+export default connect(mapStateToProps)(Header)
