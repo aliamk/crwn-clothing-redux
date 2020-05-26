@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import CustomButton from '../custom-button/custom-button.component'
 import CartItem from '../cart-item/cart-item.component'
+import { selectCartItems } from '../../redux/cart/cart.selectors'
+
 
 import './cart-dropdown.styles.scss'
 
@@ -25,8 +27,9 @@ const CartDropdown = ({ cartItems }) => (
 )
 
 // Tell App to look for state in cart-item and not in App.js
-const mapStateToProps = ({ cart: {cartItems} }) => ({
-  cartItems
+// Use Reselect to stop the cart dropdown re-rendering on every unrelated state change. 
+ const mapStateToProps = (state) => ({
+  cartItems: selectCartItems(state)
 })
 
 export default connect(
