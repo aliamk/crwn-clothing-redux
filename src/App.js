@@ -46,7 +46,10 @@ class App extends React.Component {
       <Header/>
         <Switch>
           <Route exact path='/' component={ HomePage } />
-          <Route  path='/shop' component={ ShopPage } />
+          <Route path='/shop' component={ ShopPage } />
+          {/* RENDER is a JS invocation, allows us to use JS in place of component,
+          determines which component to return: If this.props.currentUser is true, 
+          redirect to the homepage; if false then redirect to sign-in page */}
           <Route 
             exact path='/signin' 
             render={() => 
@@ -63,16 +66,28 @@ class App extends React.Component {
   }
 }
 
-// Redirect a signed-in user from the sign-in page
+/* redux: this function tells the app to look to the userReducer for 
+information on state changes instead of App.js */
+
+/* Redirect a signed-in user away from the sign-in page by getting access
+to this.props.currentUser */
+/* Added mapStateToProps in App.js because all routing to and from pages
+happens on the app component */
+// ({ user }) "Destructure off our userReducer"
 const mapStateToProps = ({ user }) => ({
   currentUser: user.currentUser
 })
 
+/* Dispatch assumes that every object that it receives 
+is an action and passes it on to the reducers */
+
+/* When a user signs-in, the user info is dispatched to the reducers via 
+user.action and updates the state from null to the user */
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
 export default connect(
-  mapStateToProps, 
-  mapDispatchToProps
+  mapStateToProps /*this would be null if not for the sign-in redirect*/, 
+  mapDispatchToProps 
 )(App);

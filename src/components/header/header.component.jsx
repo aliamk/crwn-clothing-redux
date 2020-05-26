@@ -4,10 +4,12 @@ import { auth } from '../../firebase/firebase.utils'
 import { connect } from 'react-redux' //A HOC that lets us modify components to have access to things related to Redux
 
 import { ReactComponent as Logo } from '../../assets/crown.svg'
+import CartIcon from '../cart-icon/cart-icon.component'
+import CartDropdown from '../cart-dropdown/cart-dropdown.component'
 import './header.styles.scss'
 
 
-const Header = ({ currentUser }) => (
+const Header = ({ currentUser, hidden }) => (
   <div className="header">
     <Link className='logo-container' to='/'>
       <Logo className='logo' />
@@ -25,16 +27,26 @@ const Header = ({ currentUser }) => (
         :
         <Link className='option' to='/signin'>SIGN IN</Link>
       }
+      <CartIcon />
     </div>
+    {
+      hidden ? null :
+    <CartDropdown />
+    }
   </div>
 )
 
-// Use the ternary operator to generate a SIGN OUT button if the user is signed in, and to return to 
-// a SIGN IN button when the user is signed out
+/* Use the ternary operation to generate a SIGN OUT button if the user is signed in,
+ and to return to a SIGN IN button when the user is signed out */
 
-// redux: this function connects state header with the userReducer w/o going though App.js
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+ /* Use a ternary operation to show and hide the cart drowdown menu */
+
+// Advanced destructuring for nested values
+const mapStateToProps = ({user: {currentUser}, cart: {hidden}}) => ({
+  currentUser,
+  hidden
 })
 
-export default connect(mapStateToProps)(Header)
+export default connect(
+  mapStateToProps
+  )(Header)
