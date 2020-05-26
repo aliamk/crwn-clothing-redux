@@ -7,8 +7,9 @@ const INITIAL_STATE = {
   cartItems: []
 }
 
-// Keep the dropdown hidden unless the following action is triggered
+// Keep the dropdown hidden unless the TOGGLE action is triggered
 // Keep the cart empty (default state) unless the action (AddToCart button) is triggered
+// 'state.cartItems, action.payload' = existing cart items and new cart items
 const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CartActionTypes.TOGGLE_CART_HIDDEN:
