@@ -31,7 +31,7 @@ export const selectCartHidden = createSelector(
 
 export const selectCartItemsCount = createSelector(
   [selectCartItems],    // Argument one: output selector
-  cartItems =>          // Argument two: cartReducer > cartItems
+  (cartItems) =>          // Argument two: cartReducer > cartItems
     cartItems.reduce(
       (accumulatedQuantity, cartItem) => 
         accumulatedQuantity + cartItem.quantity,
@@ -42,7 +42,7 @@ export const selectCartItemsCount = createSelector(
 // Tallying the items in cartItems and displaying in /checkout (checkout.component.jsx)
 export const selectCartTotal = createSelector(
   [selectCartItems],    // Argument one: output selector
-  cartItems =>          // Argument two: cartReducer > cartItems
+  (cartItems) =>          // Argument two: cartReducer > cartItems
     cartItems.reduce(
       (accumulatedQuantity, cartItem) => 
         accumulatedQuantity + cartItem.quantity * cartItem.price,
