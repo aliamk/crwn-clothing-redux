@@ -5,7 +5,11 @@ import rootReducer from './root-reducer'
 
 /* All the values in the 'logger' array will be
 spread into '...middlewares' as individual arguments */
-const middlewares = [ logger ]
+const middlewares = []
+
+if (process.env.NODE_ENV === 'development') {
+  middlewares.push(logger)
+}
 
 export const store = createStore(
   rootReducer, 
