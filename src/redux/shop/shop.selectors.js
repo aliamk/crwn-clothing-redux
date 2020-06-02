@@ -20,7 +20,7 @@ export const selectCollections = createSelector(
   shop => shop.collections
 )
 
-/* Converting the collections object into an array for selectCollections to use
+/* For /shop: Convert the collections object into an array for selectCollections to use
 Get all the keys in object:collections and make an array
 Map over all the keys in the array and return all the values at those keys */
 export const selectCollectionsforPreview = createSelector(
