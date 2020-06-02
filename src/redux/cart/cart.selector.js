@@ -18,7 +18,6 @@ const selectCart = state => state.cart
 
 // OUTPUT SELECTORS
 
-
 export const selectCartItems = createSelector(
   [selectCart],           // Argument one: input selector
   (cart) => cart.cartItems // Argument two:cartReducer

@@ -19,6 +19,7 @@ import { selectCurrentUser } from './redux/user/user.selector'
 
 
 class App extends React.Component {
+  
   unsubscribeFromAuth = null  // To prevent memory leaks, we need to open and close the subscription
 
   componentDidMount() {
@@ -54,9 +55,6 @@ class App extends React.Component {
           <Route exact path='/' component={ HomePage } />
           <Route path='/shop' component={ ShopPage } />
           <Route exact path='/checkout' component={ CheckoutPage } />
-          {/* RENDER is a JS invocation, allows us to use JS in place of component,
-          determines which component to return: If this.props.currentUser is true, 
-          redirect to the homepage; if false then redirect to sign-in page */}
           <Route 
             exact path='/signin' 
             render={() => 
@@ -73,13 +71,19 @@ class App extends React.Component {
   }
 }
 
+/* RENDER is a JS invocation, allows us to use JS in place of component,
+determines which component to return: If this.props.currentUser is true, 
+redirect to the homepage; if false then redirect to sign-in page */
+
 /* redux: this function tells the app to look to the userReducer for 
 information on state changes instead of App.js */
 
 /* Redirect a signed-in user away from the sign-in page by getting access
 to this.props.currentUser */
+
 /* Added mapStateToProps in App.js because all routing to and from pages
 happens on the app component */
+
 // ({ user }) "Destructure off our userReducer"
 /* const mapStateToProps = ({ user }) => ({
   currentUser: user.currentUser
