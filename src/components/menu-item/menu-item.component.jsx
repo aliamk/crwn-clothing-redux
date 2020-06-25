@@ -1,8 +1,36 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
-import './menu-item.styles.scss'
+// import './menu-item.styles.scss'
+
+import {
+  MenuItemContainer,
+  BackgroundImageContainer,
+  ContentContainer,
+  ContentTitle,
+  ContentSubtitle
+} from './menu-item.styles';
 
 const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
+  <MenuItemContainer
+    size={size}
+    onClick={() => history.push(`${match.url}${linkUrl}`)}
+  >
+    <BackgroundImageContainer
+      className='background-image'
+      imageUrl={imageUrl}
+    />
+    <ContentContainer className='content'>
+      <ContentTitle>{title.toUpperCase()}</ContentTitle>
+      <ContentSubtitle>SHOP NOW</ContentSubtitle>
+    </ContentContainer>
+  </MenuItemContainer>
+);
+
+export default withRouter(MenuItem);
+
+
+
+/* const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
   <div 
     className={`${size} menu-item`} 
     onClick={() => history.push(`${match.url}${linkUrl}`)}
@@ -24,3 +52,4 @@ const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
 // Using dynamic CSS for the size and imageUrl
 
 export default withRouter(MenuItem)
+*/

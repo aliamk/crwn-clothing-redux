@@ -28,7 +28,7 @@ export const selectCollectionsforPreview = createSelector(
   collections => Object.keys(collections)
     .map(key => 
       collections[key]
-      )
+    )
 )
   
 /*
